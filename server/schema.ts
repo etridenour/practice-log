@@ -3,7 +3,7 @@ export const typeDefs = `#graphql
     id: ID!
     instrument: String!
     duration: Int!
-    tempo: Int
+    tempo: [Int]
     notes: String
     createdAt: String!
   }
@@ -16,7 +16,7 @@ export const typeDefs = `#graphql
   input CreateSessionInput {
     instrument: String!
     duration: Int!
-    tempo: Int
+    tempo: [Int]
     notes: String
   }
 

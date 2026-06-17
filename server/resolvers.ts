@@ -5,7 +5,7 @@ interface SessionRow {
   id: number;
   instrument: string;
   duration: number;
-  tempo: number | null;
+  tempo: string | null;  // stored as JSON string in SQLite
   notes: string | null;
   created_at: string;
 }
@@ -16,7 +16,7 @@ function toSession(row: SessionRow) {
     id: String(row.id),
     instrument: row.instrument,
     duration: row.duration,
-    tempo: row.tempo,
+    tempo: row.tempo ? JSON.parse(row.tempo) : null,
     notes: row.notes,
     createdAt: row.created_at,
   };
@@ -35,11 +35,11 @@ export const resolvers = {
   },
 
   Mutation: {
-    createSession: (_: unknown, args: { input: { instrument: string; duration: number; tempo?: number; notes?: string } }) => {
+    createSession: (_: unknown, args: { input: { instrument: string; duration: number; tempo?: number[]; notes?: string } }) => {
       const { instrument, duration, tempo, notes } = args.input;
       const result = db.prepare(
         'INSERT INTO sessions (instrument, duration, tempo, notes) VALUES (?, ?, ?, ?)'
-      ).run(instrument, duration, tempo ?? null, notes ?? null);
+      ).run(instrument, duration, tempo ? JSON.stringify(tempo) : null, notes ?? null);
 
       const row = db.prepare('SELECT * FROM sessions WHERE id = ?').get(result.lastInsertRowid) as SessionRow;
       return toSession(row);
