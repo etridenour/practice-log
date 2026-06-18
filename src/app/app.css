@@ -1,0 +1,24 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 16px 24px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.app-header h1 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: #555;
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+
+nav a.active {
+  color: #4a90d9;
+  font-weight: 600;
+}

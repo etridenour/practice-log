@@ -1,1 +1,39 @@
-<p>session-history works!</p>
+<div class="session-history">
+  <h2>Practice History</h2>
+
+  <div class="stats">
+    <span>Total sessions: {{ sessions().length }}</span>
+    <span>Total practice time: {{ totalMinutes() }} minutes</span>
+  </div>
+
+  @if (loading()) {
+    <p class="status">Loading sessions...</p>
+  }
+
+  @if (error()) {
+    <p class="status error">Error: {{ error() }}</p>
+  }
+
+  @if (sessions().length === 0 && !loading()) {
+    <p class="status">No sessions logged yet. Start practicing!</p>
+  }
+
+  @for (session of sessions(); track session.id) {
+    <div class="session-card">
+      <div class="session-header">
+        <strong>{{ session.instrument }}</strong>
+        <span class="session-date">{{ session.createdAt | date:'medium' }}</span>
+      </div>
+      <div class="session-details">
+        <span>{{ session.duration }} min</span>
+        @if (session.tempo) {
+          <span>BPM: {{ session.tempo.join(', ') }}</span>
+        }
+      </div>
+      @if (session.notes) {
+        <p class="session-notes">{{ session.notes }}</p>
+      }
+      <button class="delete-btn" (click)="deleteSession(session.id)">Delete</button>
+    </div>
+  }
+</div>

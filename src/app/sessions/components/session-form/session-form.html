@@ -1,1 +1,25 @@
-<p>session-form works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="session-form">
+  <h2>Log Practice Session</h2>
+
+  <div class="form-field">
+    <label for="instrument">Instrument</label>
+    <input id="instrument" formControlName="instrument" placeholder="e.g. Guitar, Piano" />
+  </div>
+
+  <div class="form-field">
+    <label for="duration">Duration (minutes)</label>
+    <input id="duration" type="number" formControlName="duration" placeholder="30" />
+  </div>
+
+  <div class="form-field">
+    <label for="tempo">Tempo / BPM (comma-separated)</label>
+    <input id="tempo" formControlName="tempo" placeholder="e.g. 120, 140, 160" />
+  </div>
+
+  <div class="form-field">
+    <label for="notes">Notes</label>
+    <textarea id="notes" formControlName="notes" rows="3" placeholder="What did you practice?"></textarea>
+  </div>
+
+  <button type="submit" [disabled]="form.invalid">Save Session</button>
+</form>
