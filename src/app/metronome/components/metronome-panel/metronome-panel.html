@@ -1,0 +1,45 @@
+<div class="metronome">
+  <h2>Metronome</h2>
+
+  <div class="beat-display">
+    @for (beat of [].constructor(beatsPerMeasure()); track $index) {
+      <div
+        class="beat-dot"
+        [class.active]="$index + 1 === currentBeat()"
+        [class.accent]="$index === 0 && $index + 1 === currentBeat()"
+      ></div>
+    }
+  </div>
+
+  <div class="bpm-display">{{ bpm() }} BPM</div>
+
+  <div class="controls">
+    <div class="control-group">
+      <label for="bpm">Tempo</label>
+      <input
+        id="bpm"
+        type="range"
+        min="40"
+        max="240"
+        [value]="bpm()"
+        (input)="onBpmChange($event)"
+      />
+    </div>
+
+    <div class="control-group">
+      <label for="beats">Beats per measure</label>
+      <select id="beats" [value]="beatsPerMeasure()" (change)="onBeatsChange($event)">
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+      </select>
+    </div>
+  </div>
+
+  <button class="play-btn" (click)="togglePlay()">
+    {{ isPlaying() ? 'Stop' : 'Start' }}
+  </button>
+</div>

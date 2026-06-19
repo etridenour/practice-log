@@ -1,0 +1,77 @@
+.metronome {
+  max-width: 400px;
+  text-align: center;
+  padding: 24px;
+}
+
+.beat-display {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.beat-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  transition: background 0.05s ease;
+}
+
+.beat-dot.active {
+  background: #4a90d9;
+}
+
+.beat-dot.accent {
+  background: #d9534f;
+}
+
+.bpm-display {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 16px 0;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.control-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.play-btn {
+  padding: 12px 48px;
+  font-size: 1.25rem;
+  background: #4a90d9;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.play-btn:hover {
+  background: #357abd;
+}
